@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+.header {
+  background: #1f1f1f;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 15px 0;
+}
+
+.header__logo {
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.header__search {
+  background: white;
+  max-width: 550px;
+  width: 100%;
+  display: flex;
+  min-height: 40px;
+  height: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  align-items: center;
+  margin-left: 170px;
+}
+.header__search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0 15px;
+  color: #1f1f1f;
+}
+.header__search button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  padding: 6px 5px 0;
+  cursor: pointer;
+}
+
+::placeholder {
+  color: #acacac;
+  font-size: 15px;
+}
+
+.header__language {
+  border: 1px solid white;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.movie {
+}
+
+.movie-section {
+  background: #141414;
+  padding-top: 170px;
+  color: #fff;
+}
+
+.movie-section__inner {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
+}
+
+.movie__title {
+  font-size: 15px;
+}
+.movie__genres {
+  font-size: 10px;
+}
+
+.movie__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about {
+  background: #141414;
+  padding-top: 100px;
+}

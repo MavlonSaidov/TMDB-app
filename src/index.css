@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans";
+}
+
+.container {
+  max-width: 1400px;
+  padding: 0 30px;
+  width: 92%;
+  margin: 0 auto;
+}
