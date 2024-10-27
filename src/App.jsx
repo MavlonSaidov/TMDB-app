@@ -6,11 +6,10 @@ import About from "./components/About";
 import { Route, Routes } from "react-router-dom";
 
 const App = () => {
-  let en = "en-US";
-  let ru = "ru-RU";
   let [data, setData] = useState("");
   let [genres, setGenres] = useState([]);
-  let lang = en;
+  let [cast, setCast] = useState('')
+  let [lang, setLang] = useState('ru-RU')
 
   useEffect(() => {
     fetch(
@@ -24,18 +23,27 @@ const App = () => {
     )
       .then((res) => res.json())
       .then((data) => setGenres(data.genres));
+    
+      fetch(
+      `https://api.themoviedb.org/3/movie/1184918/credits?api_key=245e10fb2b807cec9c8e3963076dcd10&language=${lang}`
+    )
+      .then((res) => res.json())
+      .then((data) => setCast(data));
   }, [lang]);
-  console.log(data);
+
+  function getLanguage(lang) {
+    setLang(lang)
+  }
 
   return (
     <div className="app">
-      <Header />
+      <Header getLanguage={getLanguage} />
       <Routes>
         <Route
           path="/"
           element={<MovieSection data={data} genres={genres} />}
         />
-        <Route path=":id" element={<About data={data} />} />
+        <Route path=":id" element={data && genres && cast ? <About data={data} genres={genres} cast={cast} /> : 'loading'} />
       </Routes>
     </div>
   );

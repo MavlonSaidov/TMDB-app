@@ -1,7 +1,10 @@
 import React from "react";
 import { IoMdSearch } from "react-icons/io";
 
-const Header = () => {
+const Header = ({getLanguage}) => {
+  function handleLang(value) {
+    getLanguage(value)
+  }
   return (
     <div className="header">
       <div className="container">
@@ -17,9 +20,10 @@ const Header = () => {
               <IoMdSearch />
             </button>
           </form>
-          <div className="header__language">
-            <span>RU</span>
-          </div>
+          <select onChange={(e) => handleLang(e.target.value)} className="header__language">
+            <option value="ru-RU">RU</option>
+            <option value="en-US">EN</option>
+          </select>
         </div>
       </div>
     </div>
