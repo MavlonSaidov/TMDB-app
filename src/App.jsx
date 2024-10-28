@@ -8,7 +8,7 @@ import { Route, Routes } from "react-router-dom";
 const App = () => {
   let [data, setData] = useState("");
   let [genres, setGenres] = useState([]);
-  let [cast, setCast] = useState('')
+
   let [lang, setLang] = useState('ru-RU')
 
   useEffect(() => {
@@ -24,11 +24,6 @@ const App = () => {
       .then((res) => res.json())
       .then((data) => setGenres(data.genres));
     
-      fetch(
-      `https://api.themoviedb.org/3/movie/1184918/credits?api_key=245e10fb2b807cec9c8e3963076dcd10&language=${lang}`
-    )
-      .then((res) => res.json())
-      .then((data) => setCast(data));
   }, [lang]);
 
   function getLanguage(lang) {
@@ -43,7 +38,7 @@ const App = () => {
           path="/"
           element={<MovieSection data={data} genres={genres} />}
         />
-        <Route path=":id" element={data && genres && cast ? <About data={data} genres={genres} cast={cast} /> : 'loading'} />
+        <Route path=":id" element={data && genres ? <About data={data} lang={lang} genres={genres} /> : 'loading'} />
       </Routes>
     </div>
   );

@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function About({ data, genres, cast }) {
+function About({ data, genres, lang }) {
   const { id } = useParams();
+  let [cast, setCast] = useState('')
   const movie = data.results.find((item) => item.id == id);
   console.log(cast);
   const imageUrl = "https://image.tmdb.org/t/p/w300";
+
+  useEffect(()=> {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=245e10fb2b807cec9c8e3963076dcd10&language=${lang}`
+    )
+      .then((res) => res.json())
+      .then((data) => setCast(data));
+  }, [])
   return (
     <div className="about">
       <div className="container">
@@ -33,7 +42,7 @@ function About({ data, genres, cast }) {
           </div>
           <div className="about__cast">
             {
-              cast.cast.map(item => {
+              cast && cast.cast.map(item => {
                 return <img src={imageUrl + item.profile_path}/>
               })
             }
