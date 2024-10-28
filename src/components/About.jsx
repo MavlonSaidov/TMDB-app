@@ -5,17 +5,24 @@ import { useParams } from "react-router-dom";
 function About({ data, genres, lang }) {
   const { id } = useParams();
   let [cast, setCast] = useState("");
+  let [videos, setVideos] = useState("");
   const movie = data.results.find((item) => item.id == id);
   console.log(cast);
   const imageUrl = "https://image.tmdb.org/t/p/w300";
-  console.log(cast)
+  console.log(cast);
   useEffect(() => {
     fetch(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=245e10fb2b807cec9c8e3963076dcd10&language=${lang}`
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=245e10fb2b807cec9c8e3963076dcd10&language=${lang}`
     )
       .then((res) => res.json())
       .then((data) => setCast(data));
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=245e10fb2b807cec9c8e3963076dcd10&language=${lang}`
+    )
+      .then((res) => res.json())
+      .then((data) => setVideos(data));
   }, [lang]);
+  console.log(videos);
   return (
     <div className="about">
       <div className="container">
@@ -45,13 +52,26 @@ function About({ data, genres, lang }) {
                     return (
                       <div className="cast">
                         <div className="cast__image">
-                          {item.profile_path ? <img src={imageUrl + item.profile_path} /> : <GiCharacter fontSize={110} color="black"/>}
+                          {item.profile_path ? (
+                            <img src={imageUrl + item.profile_path} />
+                          ) : (
+                            <GiCharacter fontSize={110} color="black" />
+                          )}
                         </div>
                         <h5>{item.name}</h5>
                         <span>{item.character}</span>
                       </div>
                     );
                   })}
+              </div>
+              <div className="about__videos">
+                <iframe width={800} height={450}
+                  src={videos && `https://www.youtube.com/embed/${videos.results[0].key}`}
+                  frameborder="0"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                  title="video"
+                />
               </div>
             </div>
           </div>
